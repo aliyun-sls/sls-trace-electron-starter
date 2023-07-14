@@ -36,8 +36,8 @@ provider.addSpanProcessor(new SimpleSpanProcessor(new ConsoleSpanExporter()))
 provider.addSpanProcessor(
   new SimpleSpanProcessor(
     new SWTExporterBrowser({
-      host: 'cn-beijing.log.aliyuncs.com',
-      project: 'qs-demos',
+      host: 'cn-hangzhou.log.aliyuncs.com',
+      project: 'sls-mall',
       logstore: 'sls-mall-raw',
     })
   )
@@ -74,9 +74,13 @@ const getCarrier = () => {
 }
 
 const onLoad = async () => {
-  axios.get(
-    'http://sls-mall.caa227ac081f24f1a8556f33d69b96c99.cn-beijing.alicontainer.com/catalogue/03fef6ac-1896-4ce8-bd69-b798f85c6e0b'
-  )
+  axios.post(
+    "http://sls-mall.cfa82911e541341a1b9d21d527075cbfe.cn-hangzhou.alicontainer.com/mall/api/login",
+    {
+      name: "sls-doc",
+      password: "123456",
+    }
+  );
 
   await tracer.startActiveSpan('1. onLoad', async (span) => {
     console.log('STARTING', getCarrier())
