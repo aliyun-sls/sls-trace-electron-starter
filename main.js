@@ -68,29 +68,13 @@ var tracer = opentelemetry.trace.getTracer("front-end");
 const loadContext = (carrier) => propagation.extract(context.active(), carrier);
 
 function registerIpcHandlers() {
-  ipcMain.handle("foo", (event, carrier) => {
-    tracer.startActiveSpan("main:foo:request", {}, loadContext(carrier), () => {
-      axios.post(
-        "http://sls-mall.cfa82911e541341a1b9d21d527075cbfe.cn-hangzhou.alicontainer.com/mall/api/login",
-        {
-          name: "sls-doc",
-          password: "123456",
-        }
-      );
-    });
-
-    tracer.startActiveSpan("main:foo", {}, loadContext(carrier), (span) => {
+  ipcMain.handle("getfile", (event, carrier) => {
+    return tracer.startActiveSpan("main:getfile:request", {}, loadContext(carrier), (span) => {
+      // mock get file
       span.end();
-      return "Hello foo!";
+      return 'file'
     });
   });
-
-  ipcMain.handle("bar", (event, carrier) =>
-    tracer.startActiveSpan("main:bar", {}, loadContext(carrier), (span) => {
-      span.end();
-      return "Hello bar!";
-    })
-  );
 }
 
 function createWindow() {

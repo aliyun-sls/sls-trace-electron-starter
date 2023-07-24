@@ -82,14 +82,17 @@ const onLoad = async () => {
     }
   );
 
+  const getFile = async (span) => {
+    const file = await window.electron.getfile(getCarrier())
+    span.end()
+    return file
+  }
+
   await tracer.startActiveSpan('1. onLoad', async (span) => {
     console.log('STARTING', getCarrier())
-    const fooResult = await tracer.startActiveSpan('2. runFoo', runFoo)
-    console.log('DONE FOO', getCarrier())
-    const barResult = await tracer.startActiveSpan('3. runBar', runBar)
-    console.log('DONE BAR', getCarrier())
+    const fileResult = await tracer.startActiveSpan('2. getFile', getFile)
+    console.log('DONE FOO', getCarrier(), fileResult)
     span.end()
-    console.log('COMPLETE', getCarrier(), { fooResult, barResult })
   })
 }
 
