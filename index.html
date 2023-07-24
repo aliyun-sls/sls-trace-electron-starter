@@ -16,6 +16,23 @@
         justify-content: center;
       }
     </style>
+    <script src="https://g.alicdn.com/sls/sls-js-sdk/0.2.8/web-browser.js"></script>
+    <script>
+      window.SLS_CLIENT &&
+        SLS_CLIENT.init({
+          host: "cn-hangzhou.log.aliyuncs.com",
+          project: "sls-mall",
+          logstore: "sls-mall-raw",
+          workspace: "sls-mall",
+          env: "prod",
+          service: "web",
+          enableRuntimeError: true,
+          enableResourcePerf: true,
+          enableRequest: true,
+          enablePerf: true,
+          enableTrace: false,
+        });
+    </script>
   </head>
   <body>
     <h1>See Console Output</h1>
