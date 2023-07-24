@@ -63,7 +63,7 @@ registerInstrumentations({
 // 必须在 registerInstrumentations 后才能 require("http")
 const axios = require("axios");
 
-var tracer = opentelemetry.trace.getTracer("front-end");
+var tracer = opentelemetry.trace.getTracer("example-tracer-main");
 
 const loadContext = (carrier) => propagation.extract(context.active(), carrier);
 
